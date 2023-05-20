@@ -1,0 +1,127 @@
+using System;
+
+class Program
+
+{
+
+    static void Main()
+
+    {
+
+        bool finishedRiding = false;
+
+        double totalDistance = 0;
+
+        int takenRides = 0;
+
+        //Asking for info
+
+        Console.WriteLine("Welcome to Daily Bike Tracker");
+
+        Console.WriteLine("What's your name?");
+
+        String name = Console.ReadLine();
+
+        Console.WriteLine($"Hello, {name}. Enter the number of kilometers you traveled today, then type 'done' when you are done." );
+
+        
+
+        while (!finishedRiding)
+
+        {
+
+            Console.Write("Enter the ride's total distance for today:");
+
+            string input = Console.ReadLine();
+
+            bool validInput = true;
+
+            double Distance = 0;
+
+            if (input.ToLower() == "done")
+
+            {
+
+                finishedRiding = true;
+
+            }
+
+            else
+
+            {
+
+                foreach (char Ridee in input)
+
+                {
+
+                    if (!Char.IsDigit(Ridee) && Ridee != '.')
+
+                    {
+
+                        validInput = false;
+
+                        break;
+
+                    }
+
+                }
+
+                if (validInput)
+
+                {
+
+                    Distance = Convert.ToDouble(input);
+
+                    if (Distance <= 0)
+
+                    {
+
+                        Console.WriteLine("There must be a distance that is bigger than zero.");
+
+                    }
+
+                    else
+
+                    {
+
+                        totalDistance += Distance;
+
+                        takenRides++;
+
+                        Console.WriteLine($"Ride {takenRides} completed. You traveled {Distance} kilometers.");
+
+                    }
+
+                }
+
+                else
+
+                {
+
+                    Console.WriteLine("Invalid annswer. Please enter the distance or type 'done' if you are done.");
+
+                }
+
+            }
+
+            if (takenRides >= 100)
+
+            {
+
+                Console.WriteLine("The maximum number of rides has been used. Exiting.");
+
+                finishedRiding = true;
+
+            }
+
+        }
+
+        //outro
+
+        Console.WriteLine($"Congratulations! You completed {takenRides} rides and traveled a total distance of {totalDistance:F2} kilometers. Well done!");
+
+        Console.WriteLine("Thankyou For choosing our app!");
+
+    }
+
+}
